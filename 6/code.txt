@@ -1,0 +1,21 @@
+`timescale 1ns / 1ps
+
+module HW6(
+   
+    input A,
+    input [7:0] B,
+    input clk,
+    
+    output reg [7:0] Outp,
+    output [7:0] C
+    );
+    wire [7:0] Temp;
+
+    always @ (posedge clk) begin
+	    Outp <= Temp;   
+    end
+    
+    assign Temp = A ? B : Outp+1;
+    assign C = Outp+2;
+
+endmodule
