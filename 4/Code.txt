@@ -1,0 +1,42 @@
+`timescale 1ns / 1ps
+
+module HW3
+    
+    
+    output reg [1:0] ins_type,
+    input [31:0] ins,
+     output reg [2:0] d_type
+    );
+
+  
+    always @(*) begin
+
+	case(ins[27:26]) 
+
+		00: begin 
+
+			ins_type = 2'b01; 
+
+			d_type = ins[25] ? 3'b001 :
+
+				!ins[25] && !ins[4] ? 3'b010 : 
+
+				ins[25] && ins[7] && ins [4] ? 3'b011 :
+
+				!ins[25] && !ins[24] && !ins[7] && 
+
+				ins[6] && ins[5] && !ins[4] ? 3'b100 : 3'b000;
+
+		end
+
+		01: ins_type=2'b10; 
+
+		10: ins_type=2'b11; 
+
+	    	default: ins_type=2'b00; 
+	endcase
+
+
+   end 
+
+endmodule
